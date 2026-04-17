@@ -3,14 +3,14 @@
 # This is the single source of truth for your personal data across all modes.
 
 candidate:
-  full_name: "Jane Smith"
-  email: "jane@example.com"
-  phone: "+1-555-0123"
-  location: "San Francisco, CA"
-  linkedin: "linkedin.com/in/janesmith"
-  portfolio_url: "https://janesmith.dev"
-  github: "github.com/janesmith"
-  twitter: "https://x.com/janesmith"
+  full_name: "Akash Niranjan"
+  email: "akash.niranjan.ca@gmail.com"
+  phone: "+1-778-363-5813"
+  location: "Vancouver, BC, Canada"
+  linkedin: "lhttps://www.linkedin.com/in/akash-1907-niranjan/"
+  portfolio_url: ""
+  github: "github.com/akash-niranjan1998"
+  twitter: ""
   # (Optional) Canva resume design ID for visual CV generation via /career-ops pdf.
   # Find it in your Canva design URL: https://www.canva.com/design/DAxxxxxxx/...
   # The ID starts with "D" and is 11 characters long.
@@ -19,53 +19,116 @@ candidate:
 target_roles:
   # Your North Star roles — what you're optimizing for
   primary:
-    - "Senior AI Engineer"
-    - "Staff ML Engineer"
+    - "Assistant Project Manager"
+    - "Project Analyst"
+    - "Junior Project Manager"
+    - "Project Control Officer"
+    - "IT Project Coordinator"
+    - "Software Implementation Consultant"
+    - "Project Management Analyst"
+    - "Associate Project Manager"
+    - "Implementation Project Coordinator"
+    - "PMO Analyst"
+    - "Business Analyst"
+    - "Operations Analyst"
+    - "Reporting Coordinator"
+    - "Client Implementation Specialist"
+    - "Technical Project Coordinator"
+    - "Agile Project Coordinator"
+    
   # Archetypes help the evaluation system score fit
   archetypes:
-    - name: "AI/ML Engineer"
-      level: "Senior/Staff"
-      fit: "primary"        # primary = dream role, secondary = good fit, adjacent = stretch
-    - name: "AI Product Manager"
-      level: "Senior"
-      fit: "secondary"
-    - name: "Solutions Architect"
-      level: "Mid-Senior"
-      fit: "adjacent"
+  - name: "Project Management Analyst"
+    level: "Junior"
+    fit: "primary"
+  - name: "IT Project Coordinator"
+    level: "Junior"
+    fit: "primary"
+  - name: "Implementation Project Coordinator"
+    level: "Junior-Mid"
+    fit: "primary"
+  - name: "PMO Analyst"
+    level: "Junior-Mid"
+    fit: "primary"
+  - name: "Assistant Project Manager"
+    level: "Junior-Mid"
+    fit: "primary"
+  - name: "Project Control Officer"
+    level: "Junior-Mid"
+    fit: "primary"
+  - name: "Business Analyst"
+    level: "Junior-Mid"
+    fit: "primary"
+  - name: "Reporting Coordinator"
+    level: "Junior"
+    fit: "primary"
+  - name: "Software Implementation Consultant"
+    level: "Mid"
+    fit: "secondary"
+  - name: "Operations Analyst"
+    level: "Mid"
+    fit: "secondary"
+  - name: "Client Implementation Specialist"
+    level: "Mid"
+    fit: "secondary"
+  - name: "Technical Project Coordinator"
+    level: "Mid"
+    fit: "secondary"
+  - name: "Agile Project Coordinator"
+    level: "Junior-Mid"
+    fit: "secondary"
+  - name: "Program Coordinator"
+    level: "Mid"
+    fit: "secondary"
+  - name: "Project Manager"
+    level: "Mid-Senior"
+    fit: "adjacent"
+  - name: "Product Operations Manager"
+    level: "Mid-Senior"
+    fit: "adjacent"
+  - name: "AI Product Manager"
+    level: "Mid-Senior"
+    fit: "adjacent"
+  - name: "Solutions Architect"
+    level: "Mid-Senior"
+    fit: "adjacent"
 
 narrative:
   # Your professional headline (1 line)
-  headline: "ML Engineer turned AI product builder"
+  headline: "Project Coordinator and Operations Analyst driving delivery in health-tech, IT and telecom"
   # Your exit story — what makes you unique
-  exit_story: "Built and sold my SaaS after 5 years. Now focused on applied AI at scale."
+  exit_story: "Built solo PMO operations at a health-tech startup while managing concurrent telecom operations. Now focused on scaling project delivery in SaaS and enterprise environments."
   # Your top 3-5 superpowers
   superpowers:
-    - "End-to-end ML pipelines"
-    - "Fast prototyping (idea to prod in 2 weeks)"
-    - "Cross-functional communication"
+    - "End-to-end project coordination across Agile and cross-functional teams"
+    - "Translating client requirements into structured delivery plans and trackers"
+    - "Stakeholder communication and reporting across technical and business teams"
   # Proof points — projects, articles, case studies with measurable impact
   proof_points:
-    - name: "Project Alpha"
-      url: "https://janesmith.dev/project-alpha"
-      hero_metric: "Reduced inference latency 40%"
-    - name: "Open Source Tool"
-      url: "https://github.com/janesmith/tool"
-      hero_metric: "2K+ GitHub stars"
+    - name: "Jira Backlog Cleanup — WelTel Health"
+      url: ""
+      hero_metric: "Structured triage system for 7,600+ issues across 8-week phased rollout"
+    - name: "PMO Setup — WelTel Health"
+      url: ""
+      hero_metric: "Established solo PMO function supporting end-to-end project operations"
+    - name: "Implementation Coordination — WelTel Health"
+      url: ""
+      hero_metric: "Supported SaaS client onboarding and delivery across health-tech accounts"
   # Optional: dashboard/demo URL with credentials
   # dashboard:
   #   url: "https://janesmith.dev/demo"
   #   password: "demo-2026"
 
 compensation:
-  target_range: "$150K-200K"     # Your target total comp
-  currency: "USD"
-  minimum: "$120K"               # Walk-away number
-  location_flexibility: "Remote preferred, 1 week/month on-site possible"
+  target_range: "$65K-85K"     # Your target total comp
+  currency: "CAD"
+  minimum: "$60"               # Walk-away number
+  location_flexibility: "Open to remote, hybrid, or on-site anywhere in Canada"
 
 location:
-  country: "United States"
-  city: "San Francisco"
+  country: "Canada"
+  city: "Vancouver"
   timezone: "PST"
-  visa_status: "No sponsorship needed"
+  visa_status: "On open work permit in Canada, No sponsorship needed"
   # For remote roles outside your country:
   # onsite_availability: "1 week/month in any city"
