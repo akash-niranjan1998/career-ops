@@ -1,1 +1,409 @@
-s
+# Portal Scanner Configuration
+# Used by /career-ops scan to discover new offers automatically.
+#
+# Strategy (3 levels):
+#   1. Playwright → careers_url of each company (real-time, reliable)
+#   2. Greenhouse API → structured JSON (fast, Greenhouse-only)
+#   3. WebSearch with site: filters (broad discovery, may be stale)
+#
+# IMPORTANT: Each company in tracked_companies MUST have careers_url.
+#
+# HOW TO CUSTOMIZE:
+#   1. Copy this file to portals.yml in the project root
+#   2. Edit title_filter.positive with YOUR target role keywords
+#   3. Add/remove companies in tracked_companies
+#   4. Adjust search_queries for your preferred job boards
+#   5. Set enabled: false on companies you don't care about
+
+# -- Title filter --
+# The scanner uses these keywords to decide if a title is relevant.
+# At least 1 positive must match AND 0 negatives must match (case-insensitive).
+
+title_filter:
+  positive:
+    # [CUSTOMIZE] Add keywords matching YOUR target roles
+    # -- Project Management / Business Analyst / Coordinator roles --
+    - "Project Coordinator"
+    - "Project Manager"
+    - "IT Project Coordinator"
+    - "Implementation Coordinator"
+    - "Implementation Consultant"
+    - "PMO Analyst"
+    - "Project Management Analyst"
+    - "Business Analyst"
+    - "Operations Analyst"
+    - "Technical Project Coordinator"
+    - "Associate Project Manager"
+    - "Assistant Project Manager"
+    - "Project Control Officer"
+    - "Agile Project Coordinator"
+    - "Client Implementation Specialist"
+    - "Reporting Coordinator"
+    - "Delivery Coordinator"
+  negative:
+    # [CUSTOMIZE] Add keywords for roles you want to exclude
+    - "Director"
+    - "VP "
+    - "Vice President"
+    - "Principal"
+    - "Staff Engineer"
+    - "C++ "
+    - "Embedded"
+    - "Firmware"
+    - "Blockchain"
+    - "Web3"
+    - "Crypto"
+    - "COBOL"
+    - "Mainframe"
+    - "Construction"
+    - "Civil"
+    - "Structural"
+    - "Mechanical"
+    - "Electrical Engineer"
+    - "Site Supervisor"
+    - "Field Coordinator"
+    - "Estimator"
+    - "Quantity Surveyor"
+    - "Financial Planning"
+    - "Financial Analyst"
+    - "Investment"
+    - "Mortgage"
+    - "Insurance"
+    - "Accounting"
+    - "Payroll"
+    - "Audit"
+    - "Tax "
+    - "Manufacturing"
+    - "Supply Chain"
+    - "Logistics"
+    - "Warehouse"
+    - "Procurement"
+    - "Real Estate"
+    - "Property"
+    - "Mining"
+    - "Oil "
+    - "Gas "
+    - "Energy"
+    - "Utilities"
+  seniority_boost:
+    # These prefixes add relevance but are not required
+    - "Senior"
+    - "Lead"
+    - "Junior"
+    - "Associate"
+
+# -- Search queries --
+# Each query triggers a WebSearch. Use site: to filter by portal.
+# The scanner extracts title, URL, and company from results.
+
+search_queries:
+  - name: Greenhouse — Project Coordinator Canada
+    query: 'site:boards.greenhouse.io OR site:job-boards.greenhouse.io "Project Coordinator" OR "IT Project Coordinator" Canada remote'
+    enabled: true
+
+  - name: Greenhouse — Implementation Consultant Canada
+    query: 'site:boards.greenhouse.io OR site:job-boards.greenhouse.io "Implementation Consultant" OR "Implementation Coordinator" Canada'
+    enabled: true
+
+  - name: Greenhouse — PMO Analyst Canada
+    query: 'site:boards.greenhouse.io OR site:job-boards.greenhouse.io "PMO Analyst" OR "Project Management Analyst" Canada'
+    enabled: true
+
+  - name: Greenhouse — Business Analyst Canada
+    query: 'site:boards.greenhouse.io OR site:job-boards.greenhouse.io "Business Analyst" OR "Operations Analyst" Canada remote'
+    enabled: true
+
+  - name: Ashby — Project Coordinator Canada
+    query: 'site:jobs.ashbyhq.com "Project Coordinator" OR "Implementation Coordinator" Canada remote'
+    enabled: true
+
+  - name: LinkedIn — Project Coordinator Vancouver
+    query: '"Project Coordinator" OR "IT Project Coordinator" OR "PMO Analyst" Vancouver OR "British Columbia" OR remote Canada'
+    enabled: true
+
+  - name: Indeed — Implementation Consultant Canada
+    query: 'site:ca.indeed.com "Implementation Consultant" OR "Implementation Coordinator" SaaS Canada remote'
+    enabled: true
+
+  - name: Indeed — Project Coordinator Canada
+    query: 'site:ca.indeed.com "Project Coordinator" OR "Associate Project Manager" Canada hybrid OR remote'
+    enabled: true
+
+# -- Tracked companies --
+# Companies whose career pages are checked directly.
+# scan_method: playwright (default), websearch, greenhouse_api
+# For Greenhouse companies, add api: field for faster structured JSON access.
+
+tracked_companies:
+
+  - name: Benevity
+    careers_url: https://benevity.com/careers
+    scan_method: websearch
+    scan_query: 'site:benevity.com/careers "Project" OR "Coordinator" OR "Implementation" OR "Analyst"'
+    notes: "Calgary. CSR SaaS. Known company."
+    enabled: true
+
+  - name: MealSuite
+    careers_url: https://mealsuite.com/careers
+    scan_method: websearch
+    scan_query: '"MealSuite" "Project Coordinator" OR "Implementation" site:ca.indeed.com OR site:linkedin.com'
+    notes: "Healthcare foodservice SaaS. Previous target."
+    enabled: true
+
+  - name: CGI
+    careers_url: https://job-boards.greenhouse.io/cgi
+    scan_method: websearch
+    scan_query: 'site:cgi.com/careers "Project Coordinator" OR "Project Control Officer" OR "Business Analyst" Canada'
+    notes: "IT consulting. Large Canada presence."
+    enabled: true
+
+  - name: Apply Digital
+    careers_url: https://applydigital.com/careers
+    scan_method: websearch
+    scan_query: '"Apply Digital" "Project Coordinator" OR "Project Manager" OR "Delivery" Canada'
+    notes: "Vancouver. Digital transformation consultancy."
+    enabled: true
+
+  - name: Salesforce
+    careers_url: https://careers.salesforce.com
+    scan_method: websearch
+    scan_query: 'site:careers.salesforce.com "Project Coordinator" OR "Implementation" OR "Business Analyst" Canada'
+    notes: "Strong Salesforce background match."
+    enabled: true
+
+  - name: Accenture Canada
+    careers_url: https://www.accenture.com/ca-en/careers
+    scan_method: websearch
+    scan_query: 'site:accenture.com/ca-en/careers "Project Coordinator" OR "Business Analyst" OR "PMO" Canada'
+    notes: "Large consulting. Strong coordinator hiring."
+    enabled: true
+
+  - name: Deloitte Canada
+    careers_url: https://jobs.deloitte.ca
+    scan_method: websearch
+    scan_query: 'site:deloitte.com/careers "Project Coordinator" OR "Business Analyst" OR "PMO" Canada'
+    notes: "Big 4. PMO and BA roles regularly posted."
+    enabled: true
+
+  - name: TELUS
+    careers_url: https://jobs.telus.com
+    scan_method: websearch
+    scan_query: 'site:jobs.telus.com "Project Coordinator" OR "IT Project Coordinator" OR "Business Analyst"'
+    notes: "Telecom. Strong match to Bell background."
+    enabled: true
+
+  - name: Rogers Communications
+    careers_url: https://jobs.rogers.com
+    scan_method: websearch
+    scan_query: 'site:jobs.rogers.com "Project Coordinator" OR "PMO" OR "Business Analyst"'
+    notes: "Telecom. Direct Bell experience transfer."
+    enabled: true
+
+  - name: CIBC
+    careers_url: https://cibc.com/careers
+    scan_method: websearch
+    scan_query: 'site:cibc.com/careers "Project Coordinator" OR "PMO Analyst" OR "Business Analyst"'
+    notes: "Known contact at CIBC via Rashmi Ranjan."
+    enabled: true
+
+  - name: Hootsuite
+    careers_url: https://job-boards.greenhouse.io/hootsuite
+    api: https://boards-api.greenhouse.io/v1/boards/hootsuite/jobs
+    notes: "Vancouver SaaS. PM and coordinator roles."
+    enabled: true
+
+  - name: Klue
+    careers_url: https://jobs.ashbyhq.com/klue
+    scan_method: websearch
+    scan_query: 'site:jobs.ashbyhq.com/klue "Project" OR "Coordinator" OR "Operations" OR "Analyst"'
+    notes: "Vancouver SaaS. Competitive intelligence platform."
+    enabled: true
+
+  - name: Dossier Health (WelTel)
+    careers_url: https://weltelhealth.com/careers
+    scan_method: websearch
+    scan_query: '"WelTel" OR "Dossier Health" careers "Project" OR "Coordinator" OR "Implementation"'
+    notes: "Current employer. Track for referral opportunities."
+    enabled: true
+
+    # -- EMR & Health-Tech Canada --
+
+  - name: TELUS Health
+    careers_url: https://jobs.telus.com/telus-health
+    scan_method: websearch
+    scan_query: 'site:jobs.telus.com "Project Coordinator" OR "Implementation Consultant" OR "Business Analyst" "TELUS Health"'
+    notes: "Canada's largest EMR provider. PS Suite, Med Access. Strong WelTel match."
+    enabled: true
+
+  - name: WELL Health
+    careers_url: https://well.ca/careers
+    scan_method: websearch
+    scan_query: '"WELL Health" careers "Project Coordinator" OR "Implementation" OR "Operations Analyst"'
+    notes: "Vancouver. EMR + clinic network. Direct health-tech match."
+    enabled: true
+
+  - name: QHR Technologies (Accuro EMR)
+    careers_url: https://qhrtechnologies.com/careers
+    scan_method: websearch
+    scan_query: '"QHR Technologies" OR "Accuro" careers "Project Coordinator" OR "Implementation" OR "Analyst"'
+    notes: "Kelowna BC. Accuro EMR widely used in BC. Strong provincial match."
+    enabled: true
+
+  - name: Intrahealth (Profile EMR)
+    careers_url: https://intrahealth.com/careers
+    scan_method: websearch
+    scan_query: '"Intrahealth" OR "Profile EMR" careers "Implementation" OR "Project Coordinator" OR "Consultant"'
+    notes: "Vancouver BC. Profile EMR for Canadian clinics."
+    enabled: true
+
+  - name: Medscape / WebMD Health Services
+    careers_url: https://webmdhealthservices.com/careers
+    scan_method: websearch
+    scan_query: '"WebMD Health Services" careers "Project Coordinator" OR "Implementation" Canada'
+    notes: "Health SaaS. Wellness and engagement platform."
+    enabled: true
+
+  - name: PointClickCare
+    careers_url: https://job-boards.greenhouse.io/pointclickcare
+    api: https://boards-api.greenhouse.io/v1/boards/pointclickcare/jobs
+    notes: "Mississauga ON. Leading long-term care EMR in Canada. Strong implementation hiring."
+    enabled: true
+
+  - name: Cerner (Oracle Health)
+    careers_url: https://careers.oracle.com
+    scan_method: websearch
+    scan_query: 'site:careers.oracle.com "Cerner" OR "Oracle Health" "Project Coordinator" OR "Implementation Consultant" Canada'
+    notes: "Large hospital EMR. Implementation roles regularly posted."
+    enabled: true
+
+  - name: MEDITECH
+    careers_url: https://meditech.com/careers
+    scan_method: websearch
+    scan_query: '"MEDITECH" careers "Project Coordinator" OR "Implementation" OR "Business Analyst" Canada'
+    notes: "Hospital EMR. Canadian hospital clients. Implementation consultant roles."
+    enabled: true
+
+  - name: Greenway Health
+    careers_url: https://greenwayhealth.com/careers
+    scan_method: websearch
+    scan_query: '"Greenway Health" careers "Project Coordinator" OR "Implementation Consultant"'
+    notes: "Ambulatory EMR. Implementation and onboarding roles."
+    enabled: true
+
+  - name: Lighthouse MD
+    careers_url: https://lighthousemd.ca/careers
+    scan_method: websearch
+    scan_query: '"Lighthouse MD" careers "Project" OR "Implementation" OR "Coordinator"'
+    notes: "Canadian health-tech startup. Primary care digital tools."
+    enabled: true
+
+  - name: Think Research
+    careers_url: https://thinkresearch.com/careers
+    scan_method: websearch
+    scan_query: '"Think Research" careers "Project Coordinator" OR "Implementation" OR "Operations"'
+    notes: "Toronto. Clinical decision support and health-tech SaaS."
+    enabled: true
+
+  - name: Snapclarity / Mira
+    careers_url: https://mira.ca/careers
+    scan_method: websearch
+    scan_query: '"Mira" OR "Snapclarity" careers "Project" OR "Coordinator" OR "Implementation" Canada'
+    notes: "Vancouver health-tech. Mental health and primary care platform."
+    enabled: true
+  
+  # -- Additional Telecom --
+
+  - name: Shaw / Freedom Mobile
+    careers_url: https://jobs.shaw.ca
+    scan_method: websearch
+    scan_query: 'site:jobs.shaw.ca "Project Coordinator" OR "Business Analyst" OR "PMO" OR "Implementation"'
+    notes: "Vancouver. Telecom. Direct Bell/TELUS experience transfer."
+    enabled: true
+
+  - name: Quebecor / Videotron
+    careers_url: https://careers.quebecor.com
+    scan_method: websearch
+    scan_query: '"Quebecor" OR "Videotron" careers "Project Coordinator" OR "Business Analyst" OR "PMO"'
+    notes: "Quebec-based telecom. Remote roles posted for bilingual and English candidates."
+    enabled: true
+
+  - name: Cogeco
+    careers_url: https://cogeco.com/careers
+    scan_method: websearch
+    scan_query: 'site:cogeco.com/careers "Project Coordinator" OR "Business Analyst" OR "PMO Analyst"'
+    notes: "Ontario/Quebec telecom. Coordinator and analyst roles."
+    enabled: true
+
+  # -- Additional IT / Consulting --
+
+  - name: IBM Canada
+    careers_url: https://careers.ibm.com
+    scan_method: websearch
+    scan_query: 'site:careers.ibm.com "Project Coordinator" OR "Business Analyst" OR "PMO" OR "Implementation Consultant" Canada'
+    notes: "Large IT. Strong PMO and BA hiring across Canada."
+    enabled: true
+
+  - name: KPMG Canada
+    careers_url: https://home.kpmg/ca/en/home/careers.html
+    scan_method: websearch
+    scan_query: '"KPMG Canada" careers "Project Coordinator" OR "Business Analyst" OR "PMO Analyst"'
+    notes: "Big 4. PMO and BA roles in advisory practice."
+    enabled: true
+
+  - name: PwC Canada
+    careers_url: https://pwc.com/ca/en/careers.html
+    scan_method: websearch
+    scan_query: '"PwC Canada" careers "Project Coordinator" OR "Business Analyst" OR "PMO" OR "Implementation"'
+    notes: "Big 4. Technology consulting and PMO practice."
+    enabled: true
+
+  - name: Capgemini Canada
+    careers_url: https://capgemini.com/careers
+    scan_method: websearch
+    scan_query: '"Capgemini" careers "Project Coordinator" OR "Business Analyst" OR "Implementation Consultant" Canada'
+    notes: "IT consulting. Strong coordinator and BA hiring in Canada."
+    enabled: true
+
+  - name: Infosys Canada
+    careers_url: https://infosys.com/careers
+    scan_method: websearch
+    scan_query: '"Infosys" careers "Project Coordinator" OR "Business Analyst" OR "PMO" Canada'
+    notes: "IT services. TCS background highly transferable."
+    enabled: true
+
+  - name: Wipro Canada
+    careers_url: https://wipro.com/careers
+    scan_method: websearch
+    scan_query: '"Wipro" careers "Project Coordinator" OR "Business Analyst" OR "Implementation" Canada'
+    notes: "IT services. Direct TCS background match."
+    enabled: true
+
+  - name: TCS Canada
+    careers_url: https://tcs.com/careers
+    scan_method: websearch
+    scan_query: '"TCS" OR "Tata Consultancy Services" careers "Project Coordinator" OR "Business Analyst" OR "PMO" Canada'
+    notes: "Previous employer. Internal referral potential. Strong culture fit."
+    enabled: true
+
+  # -- SaaS / Tech Canada --
+
+  - name: SAP Canada
+    careers_url: https://jobs.sap.com
+    scan_method: websearch
+    scan_query: 'site:jobs.sap.com "Project Coordinator" OR "Implementation Consultant" OR "Business Analyst" Canada'
+    notes: "Vancouver/Toronto. ERP and SaaS. Implementation consultant roles strong match."
+    enabled: true
+
+  - name: Microsoft Canada
+    careers_url: https://careers.microsoft.com
+    scan_method: websearch
+    scan_query: 'site:careers.microsoft.com "Project Coordinator" OR "PMO" OR "Business Analyst" OR "Implementation" Canada'
+    notes: "Vancouver/Toronto. Large PM and coordinator org."
+    enabled: true
+
+  - name: AWS Canada
+    careers_url: https://amazon.jobs
+    scan_method: websearch
+    scan_query: 'site:amazon.jobs "Project Coordinator" OR "Technical Project Manager" OR "Implementation" Canada "Amazon Web Services"'
+    notes: "Vancouver. Cloud platform. Technical coordinator and PM roles."
+    enabled: true
